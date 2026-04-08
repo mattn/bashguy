@@ -21,7 +21,7 @@ Output ONLY the text to insert at the cursor position (no explanation, no markdo
       else
         system="You are a bash command generator. The user describes what they want to do in natural language. Output ONLY a single bash command (no explanation, no markdown, no code fences, no trailing newline). The command should work on Linux. Current directory: $(pwd)"
       fi
-      result=$(claude -p --model "${BASHGUY_MODEL:-claude-sonnet-4-20250514}" --system-prompt "$system" "$prompt" 2>/dev/null)
+      result=$(claude --no-session-persistence -p --model "${BASHGUY_MODEL:-claude-sonnet-4-20250514}" --system-prompt "$system" "$prompt" 2>/dev/null)
       echo -ne "\r\e[K" >/dev/tty
       printf '%s' "$result"
     fi
